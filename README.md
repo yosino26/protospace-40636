@@ -13,8 +13,8 @@
 
 
 ### Association
-- has_many :prototype
-- has_many :comment
+- has_many :prototypes
+- has_many :comments
 
 
 
@@ -25,12 +25,12 @@
 | title      | string     | null: false |
 | catch_copy | text       | null: false |
 | concept    | text       | null: false |
-| user       | references | null: false | 
+| user       | references | null: false, foreign_key: true |
 
 
 ### Association
 - belongs_to :user
-- has_many :comment
+- has_many :comments
 
 
 
