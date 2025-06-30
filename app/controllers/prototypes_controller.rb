@@ -2,5 +2,10 @@ class PrototypesController < ApplicationController
   def index
   end
 
-  
+  def def new
+    @prototype = Prototype.new
+  end
+
+
+
 end
