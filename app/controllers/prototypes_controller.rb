@@ -7,6 +7,18 @@ class PrototypesController < ApplicationController
   end
 
   def create
-    # ここに create の処理を書きます
+    @prototype = Prototype.new(prototype_params)
+    if @prototype.save
+      redirect_to root_path, notice: "プロトタイプを作成しました！"
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
+
+  private
+  def prototype_params
+    params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
+  end
+
+  
 end
