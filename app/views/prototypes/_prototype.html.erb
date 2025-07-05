@@ -1,16 +1,16 @@
 <div class="card">
   <% if prototype.image.attached? %>
-  <%= link_to image_tag(prototype.image, class: :card__img), root_path %>
+  <%= link_to image_tag(prototype.image, class: :card__img), prototype_path(prototype) %>
 <% else %>
-  <%= link_to image_tag("sample.png", class: :card__img), root_path %>
+  <%= link_to image_tag("sample.png", class: :card__img), prototype_path(prototype) %>
 <% end %>
 
 <div class="card__body">
-  <%= link_to prototype.title, root_path, class: :card__title %>
+  <%= link_to prototype.title, prototype_path(prototype), class: :card__title %>
   <p class="card__summary">
     <%= prototype.catch_copy %>
   </p>
-  <%= link_to "by #{prototype.user&.name || 'No User'}", root_path, class: :card__user %>
+  <%= link_to "by #{prototype.user&.name || 'No User'}", prototype_path(prototype), class: :card__user %>
 </div>
 
 </div>
