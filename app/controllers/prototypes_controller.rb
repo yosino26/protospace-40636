@@ -1,4 +1,7 @@
 class PrototypesController < ApplicationController
+  before_action :set_prototype, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
+
   def index
     @prototypes = Prototype.all
   end
@@ -17,7 +20,6 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    @prototype = Prototype.find(params[:id])
     # ログインユーザー以外が編集画面に来ないようにする場合
     unless @prototype.user == current_user
       redirect_to root_path, alert: "権限がありません。"
@@ -25,7 +27,6 @@ class PrototypesController < ApplicationController
   end
   
   def update
-    @prototype = Prototype.find(params[:id])
     if @prototype.update(prototype_params)
       redirect_to prototype_path(@prototype), notice: "プロトタイプを更新しました！"
     else
@@ -35,12 +36,26 @@ class PrototypesController < ApplicationController
 
   
   def show
-    @prototype = Prototype.find(params[:id])
     @comment = Comment.new
     @comments = @prototype.comments.includes(:user)
   end
 
+  def destroy
+    
+  end
+
+  def set_prototype
+    @prototype = Prototype.find(params[:id])
+  end
+
+  def move_to_index
+    unless @prototype.user_id == current_user.id
+      redirect_to root_path, alert: "権限がありません。"
+    end
+  end
+
   private
+
   def prototype_params
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   end
