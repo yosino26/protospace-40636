@@ -6,6 +6,11 @@ class Prototype < ApplicationRecord
     has_one_attached :image
 
       # バリデーション
-  validates :title, :catch_copy, :concept, :image, presence: true
+  validates :catch_copy, :concept, :image, presence: true
+
+  validates :title, presence: true, length: { maximum: 20 }
+  validates :catch_copy, presence: true, length: { maximum: 100 }
+  validates :concept, presence: true, length: { maximum: 500 }
+  validates :image, presence: true
   
 end
