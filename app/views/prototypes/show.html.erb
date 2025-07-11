@@ -15,9 +15,9 @@
           <!-- リンク先を edit_prototype_path に -->
           <%= link_to "編集する", edit_prototype_path(@prototype), class: :prototype__btn %>
           <!-- 削除リンク -->
-          <%= link_to "削除する", prototype_path(@prototype), 
-              method: :delete,
-              data: { confirm: "本当に削除しますか？" }, 
+          
+          <%= link_to "削除する", prototype_path(@prototype),
+              data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
               class: :prototype__btn %>
         </div>
       <% end %>
