@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update]
 
   def edit
   end
@@ -14,13 +14,12 @@ class UsersController < ApplicationController
   end  # ここで update メソッド終了
 
   def show
-    @user = User.find_by(id: params[:id])
-    if @user.nil?
-      redirect_to root_path, alert: "ユーザーが見つかりませんでした"
-    else
-      @prototypes = @user.prototypes
-    end
+    @user = User.find(params[:id])
+    @prototypes = @user.prototypes
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: "ユーザーが見つかりませんでした"
   end
+
 
   private
   def user_params
