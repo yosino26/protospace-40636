@@ -25,8 +25,9 @@ RUN apt-get update -qq && \
 RUN apt-get update -qq && \
     apt-get install -y \
       build-essential \
-      libpq-dev
-      
+      libpq-dev \
+      default-libmysqlclient-dev
+
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
