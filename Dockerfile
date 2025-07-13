@@ -21,7 +21,12 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install -y libpq-dev
 
-
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install -y \
+      build-essential \
+      libpq-dev
+      
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
